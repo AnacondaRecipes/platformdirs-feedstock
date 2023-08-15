@@ -38,13 +38,12 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  desscription: |
+  description: |
     About A small Python module for determining appropriate
     platform-specific dirs, e.g. a "user data dir".
   summary: A small Python module for determining appropriate platform-specific dirs, e.g. a "user data dir".
   dev_url: https://github.com/platformdirs/platformdirs
   doc_url: https://platformdirs.readthedocs.io/
-  doc_source_url: https://github.com/platformdirs/platformdirs/tree/main/docs
 
 extra:
   recipe-maintainers:
