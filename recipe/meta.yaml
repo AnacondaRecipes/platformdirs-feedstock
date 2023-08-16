@@ -27,6 +27,7 @@ test:
     - platformdirs
   commands:
     - pip check
+    - pytest tests -vv
   requires:
     - pip
 
