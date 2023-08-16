@@ -1,29 +1,26 @@
 {% set name = "platformdirs" %}
-{% set version = "3.8.1" %}
-
+{% set version = "3.10.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f87ca4fcff7d2b0f81c6a748a77973d7af0f4d526f98f308477c3c436c74d528
-
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/platformdirs-{{ version }}.tar.gz
+  sha256: b45696dab2d7cc691a3226759c0d3b00c47c8b6e293d96f6436f733303f77f6d
 build:
   number: 0
-  skip: True  # [py<37]
+  skip: True  # [py<38]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
     - python
     - pip
-    - hatchling 1.18.0
-    - hatch-vcs 0.3.0
+    - hatchling >=1.17.1
+    - hatch-vcs >=0.3
   run:
     - python
-    - typing-extensions >=4.6.3  # [py<38]
 
 test:
   source_files:
@@ -44,8 +41,10 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
+  description: |
+    About A small Python module for determining appropriate
+    platform-specific dirs, e.g. a "user data dir".
   summary: A small Python module for determining appropriate platform-specific dirs, e.g. a "user data dir".
-  description: A small Python module for determining appropriate platform-specific dirs, e.g. a "user data dir".
   dev_url: https://github.com/platformdirs/platformdirs
   doc_url: https://platformdirs.readthedocs.io/
 
