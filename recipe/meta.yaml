@@ -18,12 +18,10 @@ requirements:
   host:
     - python
     - pip
-    - wheel
     - hatchling >=1.17.1
     - hatch-vcs >=0.3
   run:
     - python
-    - typing-extensions >=4.6.3
 
 test:
   imports:
