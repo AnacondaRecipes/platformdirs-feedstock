@@ -32,6 +32,9 @@ test:
     - pytest tests -vv
   requires:
     - pip
+    - pytest
+    - pytest-mock
+    - appdirs
 
 about:
   home: https://github.com/platformdirs/platformdirs
