@@ -23,6 +23,8 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   imports:
     - platformdirs
   commands:
