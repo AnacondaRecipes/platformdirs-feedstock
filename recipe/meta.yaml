@@ -1,5 +1,5 @@
 {% set name = "platformdirs" %}
-{% set version = "4.3.6" %}
+{% set version = "4.3.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,23 +7,21 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 357fb2acbc885b0419afd3ce3ed34564c13c9b95c89360cd9563f73aa5e2b907
+  sha256: eb437d586b6a0986388f0d6f74aa0cde27b48d0e3d66843640bfb6bdcdb6e351
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: True  # [py<38]
+  skip: True  # [py<39]
 
 requirements:
   host:
     - python
     - pip
-    - hatchling >=1.25
+    - hatchling >=1.27
     - hatch-vcs >=0.4
   run:
     - python
-  run_constrained:
-   - mypy>=1.11.2
 
 test:
   source_files:
