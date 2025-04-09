@@ -1,26 +1,29 @@
 {% set name = "platformdirs" %}
-{% set version = "3.10.0" %}
+{% set version = "4.3.6" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/platformdirs-{{ version }}.tar.gz
-  sha256: b45696dab2d7cc691a3226759c0d3b00c47c8b6e293d96f6436f733303f77f6d
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 357fb2acbc885b0419afd3ce3ed34564c13c9b95c89360cd9563f73aa5e2b907
+
 build:
   number: 0
-  skip: True  # [py<38]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: True  # [py<38]
 
 requirements:
   host:
     - python
     - pip
-    - hatchling >=1.17.1
-    - hatch-vcs >=0.3
+    - hatchling >=1.25
+    - hatch-vcs >=0.4
   run:
     - python
+  run_constrained:
+   - mypy>=1.11.2
 
 test:
   source_files:
