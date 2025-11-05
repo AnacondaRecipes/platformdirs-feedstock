@@ -1,25 +1,25 @@
 {% set name = "platformdirs" %}
-{% set version = "4.3.7" %}
+{% set version = "4.5.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: eb437d586b6a0986388f0d6f74aa0cde27b48d0e3d66843640bfb6bdcdb6e351
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 70ddccdd7c99fc5942e9fc25636a8b34d04c24b335100223152c2803e4063312
 
 build:
   number: 0
+  skip: True  # [py<310]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: True  # [py<39]
 
 requirements:
   host:
-    - python
     - pip
+    - python
+    - hatch-vcs >=0.5
     - hatchling >=1.27
-    - hatch-vcs >=0.4
   run:
     - python
 
@@ -28,14 +28,14 @@ test:
     - tests
   imports:
     - platformdirs
-  commands:
-    - pip check
-    - pytest tests -vv
   requires:
     - pip
     - pytest
     - pytest-mock
     - appdirs
+  commands:
+    - pip check
+    - pytest tests -vv
 
 about:
   home: https://github.com/platformdirs/platformdirs
@@ -47,7 +47,7 @@ about:
     platform-specific dirs, e.g. a "user data dir".
   summary: A small Python module for determining appropriate platform-specific dirs, e.g. a "user data dir".
   dev_url: https://github.com/platformdirs/platformdirs
-  doc_url: https://platformdirs.readthedocs.io/
+  doc_url: https://platformdirs.readthedocs.io
 
 extra:
   recipe-maintainers:
