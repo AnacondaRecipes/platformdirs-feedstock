@@ -1,5 +1,5 @@
 {% set name = "platformdirs" %}
-{% set version = "4.5.0" %}
+{% set version = "4.9.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 70ddccdd7c99fc5942e9fc25636a8b34d04c24b335100223152c2803e4063312
+  sha256: 1ec356301b7dc906d83f371c8f487070e99d3ccf9e501686456394622a01a934
 
 build:
   number: 0
-  skip: True  # [py<310]
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -19,7 +19,7 @@ requirements:
     - pip
     - python
     - hatch-vcs >=0.5
-    - hatchling >=1.27
+    - hatchling >=1.29
   run:
     - python
 
@@ -30,9 +30,9 @@ test:
     - platformdirs
   requires:
     - pip
-    - pytest
-    - pytest-mock
-    - appdirs
+    - pytest >=9.0.2
+    - pytest-mock >=3.15.1
+    - appdirs >=1.4.4
   commands:
     - pip check
     - pytest tests -vv
