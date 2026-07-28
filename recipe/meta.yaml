@@ -1,13 +1,13 @@
 {% set name = "platformdirs" %}
-{% set version = "4.10.0" %}
+{% set version = "4.11.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 31e761a6a0ca04faf7353ea759bdba55652be214725111e5aac52dfa29d4bef7
+  sha256: 0555d18370482847566ffabcaa53ad7c6c1c29f195989ae1ed634a05f76ea1e0
 
 build:
   number: 0
