@@ -10,7 +10,7 @@ source:
   sha256: 427fc0bb321ae0c5b037fa03238ca74820437be162e78b4848c4d4055b9b766c
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
@@ -27,6 +27,9 @@ requirements:
 {% set deselected_tests = "" %}
 # This test fails on macOS due to a ResourceWarning raised inside pytest when pytest.main() runs in a worker thread.
 {% set deselected_tests = deselected_tests + " --deselect=tests/test_pytest_plugin.py::test_import_before_pytest_main[worker-thread]" %}  # [osx]
+# On win-arm64 the HKCU Explorer\Shell Folders registry key is not populated in the build environment, so the
+# ctypes-free fallback path (registry lookup) cannot resolve any folder and these tests fail with WinError 2.
+{% set deselected_tests = deselected_tests + " --deselect=tests/test_api.py::test_no_ctypes --deselect=tests/test_windows.py::test_get_win_folder_from_registry_real" %}  # [win and arm64]
 
 test:
   source_files:
