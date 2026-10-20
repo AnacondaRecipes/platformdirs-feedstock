@@ -1,17 +1,23 @@
 {% set name = "platformdirs" %}
-{% set version = "4.12.3" %}
+{% set version = "4.13.5" %}
+{% set deselected_tests = "" %}
+{% set deselected_tests = 'deselected_tests + " --deselect=tests/test_pytest_plugin.py::test_import_before_pytest_main[worker-thread]"' %}  # [osx]
+{% set deselected_tests = 'deselected_tests + " --deselect=tests/test_api.py::test_no_ctypes --deselect=tests/test_windows.py::test_get_win_folder_from_registry_real"' %}  # [win and arm64]
 
+# This test fails on macOS due to a ResourceWarning raised inside pytest when pytest.main() runs in a worker thread.
+# On win-arm64 the HKCU Explorer\Shell Folders registry key is not populated in the build environment, so the
+# ctypes-free fallback path (registry lookup) cannot resolve any folder and these tests fail with WinError 2.
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 427fc0bb321ae0c5b037fa03238ca74820437be162e78b4848c4d4055b9b766c
+  sha256: 05831adf87d392760f4b5c3a0a95579ab5a10b18b9b9bd43680dcb47544788a0
 
 build:
-  number: 1
-  skip: true  # [py<310]
+  number: 0
+  skip: true  # [py<311]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -22,14 +28,6 @@ requirements:
     - hatchling >=1.29
   run:
     - python
-
-
-{% set deselected_tests = "" %}
-# This test fails on macOS due to a ResourceWarning raised inside pytest when pytest.main() runs in a worker thread.
-{% set deselected_tests = deselected_tests + " --deselect=tests/test_pytest_plugin.py::test_import_before_pytest_main[worker-thread]" %}  # [osx]
-# On win-arm64 the HKCU Explorer\Shell Folders registry key is not populated in the build environment, so the
-# ctypes-free fallback path (registry lookup) cannot resolve any folder and these tests fail with WinError 2.
-{% set deselected_tests = deselected_tests + " --deselect=tests/test_api.py::test_no_ctypes --deselect=tests/test_windows.py::test_get_win_folder_from_registry_real" %}  # [win and arm64]
 
 test:
   source_files:
