@@ -1,5 +1,5 @@
 {% set name = "platformdirs" %}
-{% set version = "4.12.3" %}
+{% set version = "4.14.3" %}
 
 package:
   name: {{ name }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 427fc0bb321ae0c5b037fa03238ca74820437be162e78b4848c4d4055b9b766c
+  sha256: 021add1ab113483edbcd4694f5fbb2d688b893ea30d35e1155bb371cf4be0be8
 
 build:
-  number: 1
-  skip: true  # [py<310]
+  number: 0
+  skip: true  # [py<311]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -20,6 +20,7 @@ requirements:
     - python
     - hatch-vcs >=0.5
     - hatchling >=1.29
+    - hatch-fancy-pypi-readme >=25.1
   run:
     - python
 
